@@ -28,9 +28,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        Log.v("main", deviceList.get("Raiy-NB").mac);
         TextView y = findViewById(R.id.textView);
-        y.setText(deviceList.get("Raiy-iPhone").status);
+        y.setText("Raiy-iPhone "+ deviceList.get("Raiy-NB").mac +" "+deviceList.get("Raiy-iPhone").status);
 
     }
 
