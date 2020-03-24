@@ -8,8 +8,7 @@ import java.util.HashMap;
 
 public class CheckDevice{
 
-
-    public static void getDeviceInLAN(){
+    public static void getDeviceInLAN(final HashMap deviceList){
         Thread thread = new Thread(new Runnable() {    // Execute by a independent thread
             @Override
             public void run() {
@@ -29,7 +28,7 @@ public class CheckDevice{
                         items.put(property, row.select("td").html());
 
                         if (property.equals("MAC Address")) {
-                            MainActivity.deviceList.put(items.get("IPv4 Address / Name").split(" / ",2)[1],
+                            deviceList.put(items.get("IPv4 Address / Name").split(" / ",2)[1],
                                     new Device(items.get("MAC Address"),
                                             items.get("Status"),
                                             items.get("Last Activity")));

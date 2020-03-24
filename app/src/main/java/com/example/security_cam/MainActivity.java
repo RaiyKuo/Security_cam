@@ -2,7 +2,6 @@ package com.example.security_cam;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -19,7 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Log.v("", "-----------------------");
-        CheckDevice.getDeviceInLAN();
+
+        CheckDevice.getDeviceInLAN(deviceList);
+
         try {
             Thread.sleep(5000);
         } catch (Exception e){
