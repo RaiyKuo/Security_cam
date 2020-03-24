@@ -46,9 +46,12 @@ public class CheckDevice{
         thread.start();
     }
 
-    public static void checkIfWifiConnection(Context context){
-
-
-
+    public static String getMACofCurrentWiFi(Context context){
+        WifiManager mainWifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifi = mainWifi.getConnectionInfo();
+        return wifi.getBSSID();    // BSSID = MAC address of the Wi-Fi Access Point
     }
+
+
+
 }
