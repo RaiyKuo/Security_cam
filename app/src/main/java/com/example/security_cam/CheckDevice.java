@@ -46,12 +46,24 @@ public class CheckDevice{
         thread.start();
     }
 
-    public static String getMACofCurrentWiFi(Context context){
+    public static String isNoAnyOwnersDeviceInHouse(Context context, String home_wifi){
+
         WifiManager mainWifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifi = mainWifi.getConnectionInfo();
-        return wifi.getBSSID();    // BSSID = MAC address of the Wi-Fi Access Point
+
+        if (wifi.getBSSID().equals(home_wifi)){ // If the current internet connection is Home Wi-Fi
+            CheckDevice.getDeviceInLAN(MainActivity.deviceList);  // Update device list
+
+            try {
+                Thread.sleep(5000);    // Wait 5 sec for getDeviceInLAN() to finish updating
+            } catch (Exception e){Log.v("pause",e.toString());}
+
+            for(String device:MainActivity.owner_devices){  // Check if any owner's device in house
+                if(MainActivity.deviceList.containsKey(device))
+                    return "Device '" + device + "' in house";
+            }
+            return "No any owner's device detected via home Wi-Fi";
+        }
+        return "yes";
     }
-
-
-
 }

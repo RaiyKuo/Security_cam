@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     public final static String HOME_WIFI_AP_BSSID = "88:96:4e:a6:32:70";
+    public final static String [] owner_devices = new String[]{"Raiy-iPhone", "Janice"};
 
     public static HashMap<String, Device> deviceList = new HashMap<>();
 
@@ -20,25 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.v("", "-----------------------");
         TextView y = findViewById(R.id.textView);
+        y.setText(CheckDevice.isNoAnyOwnersDeviceInHouse(this, HOME_WIFI_AP_BSSID));
 
-        if (CheckDevice.getMACofCurrentWiFi(this).equals(HOME_WIFI_AP_BSSID))
-            y.setText("Yes");
-
-
-
-
-        /*
-        CheckDevice.getDeviceInLAN(deviceList);
-
-        try {
-            Thread.sleep(5000);
-        } catch (Exception e){
-            Log.v("pause",e.toString());
-        }
-        y.setText("Raiy-iPhone "+ deviceList.get("Raiy-NB").mac +" "+deviceList.get("Raiy-iPhone").status);
-        */
 
     }
 
