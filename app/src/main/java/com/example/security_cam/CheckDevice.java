@@ -1,10 +1,14 @@
 package com.example.security_cam;
 
+import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.util.HashMap;
+
 
 public class CheckDevice{
 
@@ -42,4 +46,9 @@ public class CheckDevice{
         thread.start();
     }
 
+    public static void checkIfWifiConnection(Context context){
+
+
+
+    }
 }
