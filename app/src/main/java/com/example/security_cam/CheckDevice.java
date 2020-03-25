@@ -59,8 +59,10 @@ public class CheckDevice{
             } catch (Exception e){Log.v("pause",e.toString());}
 
             for(String device:MainActivity.owner_devices){  // Check if any owner's device in house
-                if(MainActivity.deviceList.containsKey(device))
-                    return "Device '" + device + "' in house";
+                if(MainActivity.deviceList.containsKey(device)) {
+                    if(MainActivity.deviceList.get(device).status.equals("on"))
+                        return "Device '" + device + "' in house";
+                }
             }
             return "No any owner's device detected via home Wi-Fi";
         }
