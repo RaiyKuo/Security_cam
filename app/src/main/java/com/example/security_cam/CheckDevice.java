@@ -12,7 +12,14 @@ import java.util.HashMap;
 
 public class CheckDevice{
 
-    public static void getDeviceInLAN(final HashMap deviceList){
+    String mac, status, last_activity;
+    public CheckDevice(String mac, String status, String last_activity){
+        this.mac = mac;
+        this.status = status;
+        this.last_activity = last_activity;
+    }
+
+    public static void getDeviceInLAN(){
         Thread thread = new Thread(new Runnable() {    // Execute by a independent thread
             @Override
             public void run() {
@@ -32,8 +39,8 @@ public class CheckDevice{
                         items.put(property, row.select("td").html());
 
                         if (property.equals("MAC Address")) {
-                            deviceList.put(items.get("IPv4 Address / Name").split(" / ",2)[1],
-                                    new Device(items.get("MAC Address"),
+                            MainActivity.deviceList.put(items.get("IPv4 Address / Name").split(" / ",2)[1],
+                                    new CheckDevice(items.get("MAC Address"),
                                             items.get("Status"),
                                             items.get("Last Activity")));
                         }
@@ -52,7 +59,7 @@ public class CheckDevice{
         WifiInfo wifi = mainWifi.getConnectionInfo();
 
         if (wifi.getBSSID().equals(home_wifi)){ // If the current internet connection is Home Wi-Fi
-            CheckDevice.getDeviceInLAN(MainActivity.deviceList);  // Update device list
+            CheckDevice.getDeviceInLAN();  // Update device list
 
             try {
                 Thread.sleep(3000);     // Wait 5 sec for getDeviceInLAN() to finish updating
