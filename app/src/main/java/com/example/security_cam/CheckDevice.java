@@ -46,7 +46,7 @@ public class CheckDevice{
         thread.start();
     }
 
-    public static String isNoAnyOwnersDeviceInHouse(Context context, String home_wifi){
+    public static String isAnyOwnersDeviceInHouse(Context context, String home_wifi){
 
         WifiManager mainWifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifi = mainWifi.getConnectionInfo();
@@ -55,7 +55,7 @@ public class CheckDevice{
             CheckDevice.getDeviceInLAN(MainActivity.deviceList);  // Update device list
 
             try {
-                Thread.sleep(5000);    // Wait 5 sec for getDeviceInLAN() to finish updating
+                Thread.sleep(3000);     // Wait 5 sec for getDeviceInLAN() to finish updating
             } catch (Exception e){Log.v("pause",e.toString());}
 
             for(String device:MainActivity.owner_devices){  // Check if any owner's device in house
@@ -64,8 +64,7 @@ public class CheckDevice{
                         return "Device '" + device + "' in house";
                 }
             }
-            return "No any owner's device detected via home Wi-Fi";
         }
-        return "yes";
+        return "No";
     }
 }

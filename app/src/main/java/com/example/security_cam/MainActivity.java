@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView y = findViewById(R.id.textView);
-        y.setText(CheckDevice.isNoAnyOwnersDeviceInHouse(this, HOME_WIFI_AP_MAC));
+        y.setText(CheckDevice.isAnyOwnersDeviceInHouse(this, HOME_WIFI_AP_MAC));
 
 
     }
