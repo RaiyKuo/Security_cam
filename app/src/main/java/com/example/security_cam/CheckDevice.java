@@ -65,13 +65,13 @@ public class CheckDevice{
                 Thread.sleep(1000);     // Wait 5 sec for getDeviceInLAN() to finish updating
             } catch (Exception e){Log.v("pause",e.toString());}
 
-            for(String device:MainActivity.owner_devices){  // Check if any owner's device in house
+            for(String device:MainActivity.owner_devices){
                 if(MainActivity.deviceList.containsKey(device)) {
                     if(MainActivity.deviceList.get(device).status.equals("on"))
                         return "Device '" + device + "' in house";
-                }
+                }  // Check if there's any owner's device in house; if yes, return one of them
             }
-            return "No";
+            return "No";   // Connected to designated "Home WiFi", but no any owner's devices
         }
         return "Not connected to HOME WIFI";
     }
