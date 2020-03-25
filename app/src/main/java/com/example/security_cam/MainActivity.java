@@ -11,8 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     public final static String HOME_WIFI_AP_MAC = "88:96:4e:a6:32:70";
     public final static String [] owner_devices = new String[]{"Raiy-iPhone", "Janice"};
-    public static HashMap<String, Device> deviceList = new HashMap<>();
-
+    public static HashMap<String, Device> deviceList = new HashMap<>(); // Store device information
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -20,15 +20,15 @@ public class CheckDevice{
                     Log.v("", "test");
                     String url = "http://192.168.1.254/cgi-bin/devices.ha";
                     Elements table = Jsoup.connect(url).get().select("tr");
+        // Download HTML form the "Device List" page provided by the gateway machine of home wifi AP
 
                     Element row;
                     String property;
                     HashMap<String, String> items = new HashMap<>();
 
                     for(int i = table.size()-1; i>=0; i--){
-                        row = table.get(i);
+                        row = table.get(i);                          // Parse each row in the table
                         property = row.select("th").html();
-
                         items.put(property, row.select("td").html());
 
                         if (property.equals("MAC Address")) {
@@ -37,7 +37,7 @@ public class CheckDevice{
                                             items.get("Status"),
                                             items.get("Last Activity")));
                         }
-                    }
+                    }  // Load device info into the deviceList
                 }catch(Exception e){
                     Log.v("Jsoup error", e.toString());
                 }
