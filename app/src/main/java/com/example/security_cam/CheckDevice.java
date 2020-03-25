@@ -62,7 +62,7 @@ public class CheckDevice{
             CheckDevice.getDeviceInLAN();  // Update device list
 
             try {
-                Thread.sleep(3000);     // Wait 5 sec for getDeviceInLAN() to finish updating
+                Thread.sleep(1000);     // Wait 5 sec for getDeviceInLAN() to finish updating
             } catch (Exception e){Log.v("pause",e.toString());}
 
             for(String device:MainActivity.owner_devices){  // Check if any owner's device in house
