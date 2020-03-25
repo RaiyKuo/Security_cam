@@ -21,9 +21,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView y = findViewById(R.id.textView);
-        autoRefresh(this, 2*60*1000, y);  // Scan devices in house periodically
-        //y.setText(Boolean.toString(trigger));
+        TextView surveillance_on = findViewById(R.id.surveillance_on);
+
+        autoRefresh(this, 2*60*1000, (TextView)findViewById(R.id.scan_results));
+        // Scan devices periodically
+
+        surveillance_on.setText(Boolean.toString(trigger));
 
     }
 
