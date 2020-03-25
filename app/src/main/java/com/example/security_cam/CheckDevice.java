@@ -71,7 +71,8 @@ public class CheckDevice{
                         return "Device '" + device + "' in house";
                 }
             }
+            return "No";
         }
-        return "No";
+        return "Not connected to HOME WIFI";
     }
 }
