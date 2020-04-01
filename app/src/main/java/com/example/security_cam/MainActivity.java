@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
 import java.util.HashMap;
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -31,7 +29,6 @@ public class MainActivity extends AppCompatActivity
 
     private RtmpCamera1 rtmpCamera1;
     private Button button;
-    //private String rtmp_stream_URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +43,12 @@ public class MainActivity extends AppCompatActivity
         rtmpCamera1.setReTries(10);
         surfaceView.getHolder().addCallback(this);
 
-        //TextView surveillance_on = findViewById(R.id.surveillance_on);
-        //autoRefresh(this, 2*60*1000, (TextView)findViewById(R.id.scan_results));
-        // Scan devices periodically
-        //surveillance_on.setText(Boolean.toString(trigger));
-
+        /*
+        TextView surveillance_on = findViewById(R.id.surveillance_on);
+        autoRefresh(this, 2*60*1000, (TextView)findViewById(R.id.scan_results));
+         Scan devices periodically
+        surveillance_on.setText(Boolean.toString(trigger));
+        */
     }
 
     private final Handler handler = new Handler();
@@ -65,6 +63,7 @@ public class MainActivity extends AppCompatActivity
             }
         }, cycle_time);
     }
+
     @Override
     public void onConnectionSuccessRtmp() {
         runOnUiThread(new Runnable() {
@@ -106,22 +105,22 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onAuthErrorRtmp() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(MainActivity.this, "Auth error", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Toast.makeText(MainActivity.this, "Auth error", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override
     public void onAuthSuccessRtmp() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(MainActivity.this, "Auth success", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Toast.makeText(MainActivity.this, "Auth success", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override
