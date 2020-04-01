@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
-import android.view.SurfaceView;
-
-import com.pedro.rtplibrary.rtmp.RtmpCamera1;
 
 import java.util.HashMap;
 
@@ -31,8 +28,9 @@ public class MainActivity extends AppCompatActivity {
         // Scan devices periodically
         //surveillance_on.setText(Boolean.toString(trigger));
 
-        Intent rtmpStream = new Intent(this, ExampleRtmpActivity.class);
-        startActivity(rtmpStream);
+        Intent streamRTMP = new Intent(this, StreamRTMP.class);
+        streamRTMP.putExtra("rtmp_URL", "rtmp://192.168.1.84:1935/live/b");
+        startActivity(streamRTMP); // Call activity streamRTMP
 
     }
 
