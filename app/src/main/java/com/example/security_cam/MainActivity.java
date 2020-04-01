@@ -43,12 +43,7 @@ public class MainActivity extends AppCompatActivity
         rtmpCamera1.setReTries(10);
         surfaceView.getHolder().addCallback(this);
 
-        /*
-        TextView surveillance_on = findViewById(R.id.surveillance_on);
-        autoRefresh(this, 2*60*1000, (TextView)findViewById(R.id.scan_results));
-         Scan devices periodically
-        surveillance_on.setText(Boolean.toString(trigger));
-        */
+        //autoRefresh(this, 2*60*1000, (TextView)findViewById(R.id.scan_results));  //Scan devices periodically
     }
 
     private final Handler handler = new Handler();
