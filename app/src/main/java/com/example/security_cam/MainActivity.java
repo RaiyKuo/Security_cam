@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         rtmpCamera1.setReTries(10);
         surfaceView.getHolder().addCallback(this);
 
-        //autoRefresh(this, 2*60*1000, (TextView)findViewById(R.id.scan_results));  //Scan devices periodically
+        autoRefresh(this, 15*1000, (TextView)findViewById(R.id.scan_results));  //Scan devices periodically
     }
 
     private final Handler handler = new Handler();
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
             public void run() {
                 String deviceScanResult = CheckDevice.isAnyOwnersDeviceInHouse(context, HOME_WIFI_AP_MAC);
                 trigger=deviceScanResult.equals("No");  // If "No" owner's devices in house, trigger on
-                //show.setText(deviceScanResult);  // Showing results of device scanning (for debug purpose)
+                show.setText(deviceScanResult);  // Showing results of device scanning (for debug purpose)
                 autoRefresh(context, cycle_time, show);
             }
         }, cycle_time);
