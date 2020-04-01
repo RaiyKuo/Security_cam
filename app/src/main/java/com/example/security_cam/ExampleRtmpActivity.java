@@ -48,10 +48,10 @@ public class ExampleRtmpActivity extends AppCompatActivity
         setContentView(R.layout.activity_camera);
         SurfaceView surfaceView = findViewById(R.id.surfaceView);
 
-        button = findViewById(R.id.b_start_stop);
-        button.setOnClickListener(this);
-        bRecord = findViewById(R.id.b_record);
-        bRecord.setOnClickListener(this);
+        //button = findViewById(R.id.b_start_stop);
+        //button.setOnClickListener(this);
+        //bRecord = findViewById(R.id.b_record);
+        //bRecord.setOnClickListener(this);
 
         //Button switchCamera = findViewById(R.id.switch_camera);
         //switchCamera.setOnClickListener(this);
@@ -60,7 +60,7 @@ public class ExampleRtmpActivity extends AppCompatActivity
 
         rtmpCamera = new RtmpCamera2(surfaceView, this);
         rtmpCamera.setReTries(10);
-        rtmpCamera.startStream("rtmp://192.168.1.84:1935/live/rtmp.flv");
+        rtmpCamera.startStream("rtmp://192.168.1.84:1935/live/rtmp");
         try {
             TimeUnit.SECONDS.sleep(10);
         } catch (InterruptedException e) {
