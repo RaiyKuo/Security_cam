@@ -33,32 +33,39 @@ public class MainActivity extends AppCompatActivity
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
 
+        /* initiate surveillance (camera capturing + RTMP streaming) */
         SurfaceView surfaceView = findViewById(R.id.surfaceView);
         rtmpCamera1 = new RtmpCamera1(surfaceView, this);
         rtmpCamera1.setReTries(10);
         surfaceView.getHolder().addCallback(this);
 
-        autoRefresh(this, 15*1000, (TextView)findViewById(R.id.scan_results));  //Scan devices periodically
+        /* Periodically scanning if any device of masters are in the house*/
+        autoRefresh(this, 15*1000,
+                (TextView)findViewById(R.id.scan_results),
+                (TextView) findViewById(R.id.surveillance)
+        );
     }
 
     private final Handler handler = new Handler();
-    private void autoRefresh(final Context context, final int cycle_time, final TextView show){
+    private void autoRefresh(final Context context, final int cycle_time, final TextView scan, final TextView surv){
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 String deviceScanResult = CheckDevice.isAnyOwnersDeviceInHouse(context, HOME_WIFI_AP_MAC);
 
-                trigger=deviceScanResult.equals("No");  // If "No" owner's devices in house, trigger on
-                show.setText(deviceScanResult);  // Showing results of device scanning (for debug purpose)
+                trigger=deviceScanResult.equals("None");  // If "No" owner's devices in house, trigger on
+                scan.setText(deviceScanResult);  // Showing results of device scanning (for debug purpose)
 
-                if(trigger){
+                if(trigger){       // If no devices detected, trigger surviellance
                     startSurveillance();
+                    surv.setText("Surveillance: ON");
                 }
-                else{
+                else{              // If any master's device is detected, stop surveillance
                     stopSurveillance();
+                    surv.setText("Surveillance: OFF");
                 }
 
-                autoRefresh(context, cycle_time, show);
+                autoRefresh(context, cycle_time, scan, surv);
             }
         }, cycle_time);
     }

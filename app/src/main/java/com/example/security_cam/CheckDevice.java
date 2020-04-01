@@ -68,10 +68,10 @@ public class CheckDevice{
             for(String device:MainActivity.owner_devices){
                 if(MainActivity.deviceList.containsKey(device)) {
                     if(MainActivity.deviceList.get(device).status.equals("on"))
-                        return "Device '" + device + "' in house";
+                        return device;
                 }  // Check if there's any owner's device in house; if yes, return one of them
             }
-            return "No";   // Connected to designated "Home WiFi", but no any owner's devices
+            return "None";   // Connected to designated "Home WiFi", but no any owner's devices
         }
         return "Not connected to HOME WIFI";
     }
