@@ -13,6 +13,8 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     public final static String HOME_WIFI_AP_MAC = "88:96:4e:a6:32:70";
+    public final static String rmtp_URL = "rtmp://192.168.1.84:1935/live/android";
+
     public final static String [] owner_devices = new String[]{"Raiy-iPhone", "Janice"};
     public static boolean trigger = false;
     public static HashMap<String, CheckDevice> deviceList = new HashMap<>(); // Store device information
@@ -28,9 +30,8 @@ public class MainActivity extends AppCompatActivity {
         // Scan devices periodically
         //surveillance_on.setText(Boolean.toString(trigger));
 
-        Intent streamRTMP = new Intent(this, StreamRTMP.class);
-        streamRTMP.putExtra("rtmp_URL", "rtmp://192.168.1.84:1935/live/Nofile");
-        startActivity(streamRTMP); // Call activity streamRTMP
+
+
 
     }
 
