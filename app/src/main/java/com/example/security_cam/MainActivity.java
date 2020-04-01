@@ -9,16 +9,14 @@ import android.widget.TextView;
 import java.util.HashMap;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Toast;
 import com.pedro.rtplibrary.rtmp.RtmpCamera1;
 import net.ossrs.rtmp.ConnectCheckerRtmp;
 
 
 public class MainActivity extends AppCompatActivity
-        implements ConnectCheckerRtmp, View.OnClickListener, SurfaceHolder.Callback{
+        implements ConnectCheckerRtmp, SurfaceHolder.Callback{
 
     public final static String HOME_WIFI_AP_MAC = "88:96:4e:a6:32:70";
     public final static String rtmp_stream_URL = "rtmp://192.168.1.84:1935/live/android";
@@ -28,7 +26,6 @@ public class MainActivity extends AppCompatActivity
     public static HashMap<String, CheckDevice> deviceList = new HashMap<>(); // Store device information
 
     private RtmpCamera1 rtmpCamera1;
-    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +34,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         SurfaceView surfaceView = findViewById(R.id.surfaceView);
-        button = findViewById(R.id.b_start_stop);
-        button.setOnClickListener(this);
         rtmpCamera1 = new RtmpCamera1(surfaceView, this);
         rtmpCamera1.setReTries(10);
         surfaceView.getHolder().addCallback(this);
@@ -52,15 +47,23 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
                 String deviceScanResult = CheckDevice.isAnyOwnersDeviceInHouse(context, HOME_WIFI_AP_MAC);
+
                 trigger=deviceScanResult.equals("No");  // If "No" owner's devices in house, trigger on
                 show.setText(deviceScanResult);  // Showing results of device scanning (for debug purpose)
+
+                if(trigger){
+                    startSurveillance();
+                }
+                else{
+                    stopSurveillance();
+                }
+
                 autoRefresh(context, cycle_time, show);
             }
         }, cycle_time);
     }
 
-    @Override
-    public void onClick(View view) {
+    public void startSurveillance(){
         if (!rtmpCamera1.isStreaming()) {
             if (rtmpCamera1.isRecording()
                     || rtmpCamera1.prepareAudio() && rtmpCamera1.prepareVideo()) {
@@ -69,9 +72,11 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(this, "Error preparing stream, This device cant do it",
                         Toast.LENGTH_SHORT).show();
             }
-        } else {
-            rtmpCamera1.stopStream();
         }
+    }
+
+    public void stopSurveillance(){
+        rtmpCamera1.stopStream();
     }
 
     @Override
