@@ -3,6 +3,7 @@ package com.example.security_cam;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
@@ -30,20 +31,8 @@ public class MainActivity extends AppCompatActivity {
         // Scan devices periodically
         //surveillance_on.setText(Boolean.toString(trigger));
 
-        /*
-        SurfaceView surfaceView = findViewById(R.id.surfaceView);
-        ConnectCheckerRtmp connectCheckerRtmp;
-        //create builder
-        RtmpCamera1 rtmpCamera1 = new RtmpCamera1(surfaceView, connectCheckerRtmp);
-        //start stream
-        if (rtmpCamera1.prepareAudio() && rtmpCamera1.prepareVideo()) {
-            rtmpCamera1.startStream("rtmp://192.168.1.84:1935/live/");
-        } else {
-            //This device cant init encoders, this could be for 2 reasons: The encoder selected doesnt support any configuration setted or your device hasnt a H264 or AAC encoder (in this case you can see log error valid encoder not found)
-        }
-        //stop stream
-        rtmpCamera1.stopStream();
-        */
+        Intent rtmpStream = new Intent(this, ExampleRtmpActivity.class);
+        startActivity(rtmpStream);
 
     }
 
