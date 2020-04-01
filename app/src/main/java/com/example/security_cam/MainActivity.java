@@ -65,6 +65,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onClick(View view) {
+        if (!rtmpCamera1.isStreaming()) {
+            if (rtmpCamera1.isRecording()
+                    || rtmpCamera1.prepareAudio() && rtmpCamera1.prepareVideo()) {
+                rtmpCamera1.startStream(rtmp_stream_URL);
+            } else {
+                Toast.makeText(this, "Error preparing stream, This device cant do it",
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            rtmpCamera1.stopStream();
+        }
+    }
+
+    @Override
     public void onConnectionSuccessRtmp() {
         runOnUiThread(new Runnable() {
             @Override
@@ -91,53 +106,6 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-
-
-    @Override
-    public void onDisconnectRtmp() {
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                Toast.makeText(StreamRTMP.this, "Disconnected", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-    }
-
-    @Override
-    public void onAuthErrorRtmp() {
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                Toast.makeText(MainActivity.this, "Auth error", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-    }
-
-    @Override
-    public void onAuthSuccessRtmp() {
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                Toast.makeText(MainActivity.this, "Auth success", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (!rtmpCamera1.isStreaming()) {
-            if (rtmpCamera1.isRecording()
-                    || rtmpCamera1.prepareAudio() && rtmpCamera1.prepareVideo()) {
-                rtmpCamera1.startStream(rtmp_stream_URL);
-            } else {
-                Toast.makeText(this, "Error preparing stream, This device cant do it",
-                        Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            rtmpCamera1.stopStream();
-        }
-    }
-
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
         rtmpCamera1.startPreview();
@@ -150,6 +118,15 @@ public class MainActivity extends AppCompatActivity
         }
         rtmpCamera1.stopPreview();
     }
+
+    @Override
+    public void onDisconnectRtmp(){}
+
+    @Override
+    public void onAuthErrorRtmp(){}
+
+    @Override
+    public void onAuthSuccessRtmp(){}
 
     @Override
     public void onNewBitrateRtmp(long bitrate) {}
