@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         //surveillance_on.setText(Boolean.toString(trigger));
 
         Intent streamRTMP = new Intent(this, StreamRTMP.class);
-        streamRTMP.putExtra("rtmp_URL", "rtmp://192.168.1.84:1935/live/b");
+        streamRTMP.putExtra("rtmp_URL", "rtmp://192.168.1.84:1935/live/Nofile");
         startActivity(streamRTMP); // Call activity streamRTMP
 
     }
