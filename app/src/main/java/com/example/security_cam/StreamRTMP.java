@@ -6,7 +6,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.pedro.rtplibrary.rtmp.RtmpCamera1;
@@ -17,9 +16,6 @@ public class StreamRTMP extends AppCompatActivity
 
     private RtmpCamera1 rtmpCamera1;
     private Button button;
-    private Button bRecord;
-    private EditText etUrl;
-    private String currentDateAndTime = "";
     private String rtmp_stream_URL;
 
     @Override
@@ -98,23 +94,17 @@ public class StreamRTMP extends AppCompatActivity
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.b_start_stop:
-                if (!rtmpCamera1.isStreaming()) {
-                    if (rtmpCamera1.isRecording()
-                            || rtmpCamera1.prepareAudio() && rtmpCamera1.prepareVideo()) {
-                        rtmpCamera1.startStream(rtmp_stream_URL);
-                    } else {
-                        Toast.makeText(this, "Error preparing stream, This device cant do it",
-                                Toast.LENGTH_SHORT).show();
-                    }
+            if (!rtmpCamera1.isStreaming()) {
+                if (rtmpCamera1.isRecording()
+                        || rtmpCamera1.prepareAudio() && rtmpCamera1.prepareVideo()) {
+                    rtmpCamera1.startStream(rtmp_stream_URL);
                 } else {
-                    rtmpCamera1.stopStream();
+                    Toast.makeText(this, "Error preparing stream, This device cant do it",
+                            Toast.LENGTH_SHORT).show();
                 }
-                break;
-            default:
-                break;
-        }
+            } else {
+                rtmpCamera1.stopStream();
+            }
     }
 
     @Override
