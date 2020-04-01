@@ -18,7 +18,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven { url 'https://jitpack.io' }  // For https://github.com/pedroSG94/rtmp-rtsp-stream-client-java
     }
 }
 
