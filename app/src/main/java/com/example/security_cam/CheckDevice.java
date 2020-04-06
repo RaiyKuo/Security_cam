@@ -33,6 +33,8 @@ public class CheckDevice{
                     String property;
                     HashMap<String, String> items = new HashMap<>();
 
+                    MainActivity.deviceList.clear();   // Empty the old record
+
                     for(int i = table.size()-1; i>=0; i--){
                         row = table.get(i);                          // Parse each row in the table
                         property = row.select("th").html();

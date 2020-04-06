@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         surfaceView.getHolder().addCallback(this);
 
         /* Periodically scanning if any device of masters are in the house*/
-        autoRefresh(this, 15*1000,
+        autoRefresh(this, 10*1000,
                 (TextView)findViewById(R.id.scan_results),
                 (TextView) findViewById(R.id.surveillance)
         );
